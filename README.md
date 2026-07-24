@@ -11,6 +11,54 @@ A full-stack web application built to handle employee directory management, proj
 
 ---
 
+## 🔄 System Flowchart & Architecture
+
+```mermaid
+flowchart TD
+    classDef userLayer fill:#0284c7,stroke:#38bdf8,stroke-width:2px,color:#fff
+    classDef reactLayer fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#fff
+    classDef axiosLayer fill:#1e293b,stroke:#818cf8,stroke-width:2px,color:#fff
+    classDef jwtLayer fill:#4338ca,stroke:#a855f7,stroke-width:2px,color:#fff
+    classDef springLayer fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
+    classDef dbLayer fill:#450a0a,stroke:#ef4444,stroke-width:2px,color:#fff
+
+    User["User (Admin / Employee)"]:::userLayer
+    User -->|1. Interacts with UI| ReactUI["React Frontend (SPA)"]:::reactLayer
+
+    subgraph Client_Layer ["Frontend Client Layer"]
+        ReactUI -->|2. Form Actions & Requests| AxiosCalls["Axios API Calls"]:::axiosLayer
+        AxiosCalls -->|3. Attach Header Authorization Bearer JWT| AxiosCalls
+    end
+
+    AxiosCalls -->|4. HTTP REST Request| JwtValidation["JWT Validation Flow (AuthTokenFilter)"]:::jwtLayer
+
+    subgraph Backend_Layer ["Backend Application & Security Layer"]
+        JwtValidation -->|5a. Valid JWT| Controllers["Spring Boot REST Controller"]:::springLayer
+        JwtValidation -->|5b. Invalid / Missing JWT| ErrorHandler["Return 401 Unauthorized Error"]:::jwtLayer
+
+        subgraph Workflows ["System Subsystem Workflows"]
+            Controllers -->|Authentication Flow| AuthFlow["Auth Controller (/api/auth/login, /api/auth/register)"]:::springLayer
+            Controllers -->|Employee Flow| EmpFlow["Employee Controller (/api/employees/*, /api/upload/*)"]:::springLayer
+            Controllers -->|Project Flow| ProjFlow["Project Controller (/api/projects/*)"]:::springLayer
+            Controllers -->|Task Flow| TaskFlow["Task Controller (/api/tasks/*)"]:::springLayer
+        end
+
+        Controllers --> ServiceLayer["Service Layer (Business Logic)"]:::springLayer
+        ServiceLayer --> RepoLayer["Repository Layer (Spring Data JPA)"]:::springLayer
+    end
+
+    subgraph Persistence_Layer ["Database Layer"]
+        RepoLayer -->|6. Execute SQL Queries| Database[("MySQL Database (ems_db)")]:::dbLayer
+        Database -->|7. Return Entity Data| RepoLayer
+    end
+
+    RepoLayer --> ServiceLayer
+    ServiceLayer --> Controllers
+    Controllers -->|8. JSON Response| User
+```
+
+---
+
 ## 📷 Screenshots
 
 ### ☀️ Light Mode Dashboard & Telemetry
@@ -33,18 +81,6 @@ A full-stack web application built to handle employee directory management, proj
 
 ### ⚙️ System Settings & Preferences
 ![System Settings Preferences](screenshots/settings.jpg)
-
----
-
-## 💻 System Architecture
-
-```mermaid
-flowchart LR
-    User[Client Browser] -->|React 18 / Material UI| Frontend[React SPA - Port 3000]
-    Frontend -->|Axios REST + JWT Header| Security[Spring Security / JWT Filter]
-    Security -->|Controllers & Services| Backend[Spring Boot 3 - Port 8080]
-    Backend -->|Spring Data JPA / HikariCP| Database[(MySQL 8.0 Database)]
-```
 
 ---
 
