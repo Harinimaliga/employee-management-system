@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "ems-api-collection-id",
+		"name": "Smart Employee & Project Management System API",
+		"description": "Postman Collection for Full Stack Assessment API Endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+						},
+						"url": { "raw": "http://localhost:8080/api/auth/login", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "auth", "login"] }
+					}
+				},
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"newuser\",\n  \"email\": \"newuser@gmail.com\",\n  \"password\": \"password123\",\n  \"role\": \"ROLE_EMPLOYEE\"\n}"
+						},
+						"url": { "raw": "http://localhost:8080/api/auth/register", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "auth", "register"] }
+					}
+				}
+			]
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "Get All Employees",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+						],
+						"url": { "raw": "http://localhost:8080/api/employees", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "employees"] }
+					}
+				},
+				{
+					"name": "Create Employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Harini\",\n  \"lastName\": \"Maliga\",\n  \"email\": \"harini.new@gmail.com\",\n  \"department\": \"CSE-DS\",\n  \"designation\": \"Full Stack Developer\",\n  \"salary\": 90000\n}"
+						},
+						"url": { "raw": "http://localhost:8080/api/employees", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "employees"] }
+					}
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Get All Projects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+						],
+						"url": { "raw": "http://localhost:8080/api/projects", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "projects"] }
+					}
+				}
+			]
+		},
+		{
+			"name": "Reports & Exports",
+			"item": [
+				{
+					"name": "Export Task Report PDF",
+					"request": {
+						"method": "GET",
+						"url": { "raw": "http://localhost:8080/api/reports/tasks/pdf", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "reports", "tasks", "pdf"] }
+					}
+				},
+				{
+					"name": "Export Task Report Excel",
+					"request": {
+						"method": "GET",
+						"url": { "raw": "http://localhost:8080/api/reports/tasks/excel", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "reports", "tasks", "excel"] }
+					}
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,30 @@
+### Create a new Employee
+POST http://localhost:8080/api/employees
+Content-Type: application/json
+
+{
+  "firstName": "Harini",
+  "lastName": "Maliga",
+  "email": "harini@gmail.com",
+  "department": "CSE-DS"
+}
+
+### Get all Employees
+GET http://localhost:8080/api/employees
+
+### Get Employee by ID
+GET http://localhost:8080/api/employees/1
+
+### Update Employee by ID
+PUT http://localhost:8080/api/employees/1
+Content-Type: application/json
+
+{
+  "firstName": "Harini",
+  "lastName": "Maliga",
+  "email": "harini.updated@gmail.com",
+  "department": "AI & Data Science"
+}
+
+### Delete Employee by ID
+DELETE http://localhost:8080/api/employees/1

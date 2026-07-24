@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # 1. MySQL Database Container
+  mysql-db:
+    image: mysql:8.0
+    container_name: ems_mysql_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ems_db
+      MYSQL_ROOT_PASSWORD: Harini@123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # 2. Spring Boot Backend Container
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ems_backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/ems_db?allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Harini@123
+    depends_on:
+      - mysql-db
+    volumes:
+      - uploads_data:/app/uploads
+
+  # 3. ReactJS Frontend Container (Nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ems_frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
+  uploads_data:
