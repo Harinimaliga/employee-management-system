@@ -48,37 +48,37 @@ flowchart TD
     classDef springLayer fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
     classDef dbLayer fill:#450a0a,stroke:#ef4444,stroke-width:2px,color:#fff
 
-    User[👤 User / Admin Browser]:::userLayer
-    User -->|1. Interacts with UI| ReactUI[💻 React 18 SPA Frontend - Port 3000]:::reactLayer
+    User["👤 User / Admin Browser"]:::userLayer
+    User -->|1. Interacts with UI| ReactUI["💻 React 18 SPA Frontend - Port 3000"]:::reactLayer
 
-    subgraph Client_Side [Client Execution Space]
-        ReactUI -->|2. Form Actions & Navigation| AxiosClient[⚡ Axios API Calls]:::axiosLayer
-        AxiosClient -->|3. Attach Header: Authorization: Bearer JWT| AxiosClient
+    subgraph Client_Side ["Client Execution Space"]
+        ReactUI -->|2. Form Actions & Navigation| AxiosClient["⚡ Axios API Calls"]:::axiosLayer
+        AxiosClient -->|3. Attach Header Authorization Bearer JWT| AxiosClient
     end
 
-    AxiosClient -->|4. HTTP REST Request| JwtFilter[🔐 Spring Security JWT Validation Filter]:::jwtLayer
+    AxiosClient -->|4. HTTP REST Request| JwtFilter["🔐 Spring Security JWT Validation Filter"]:::jwtLayer
 
-    subgraph Backend_Security [Spring Boot Security & Controllers - Port 8080]
-        JwtFilter -->|5a. Valid JWT| SecurityContext[Set SecurityContextHolder Authentication]:::jwtLayer
-        JwtFilter -->|5b. Invalid / Missing JWT| AuthEntryPoint[Return HTTP 401 / 403 Error]:::jwtLayer
-        SecurityContext --> Controllers[🎮 Spring Boot REST Controllers]:::springLayer
-        Controllers -->|AuthController| AuthEndpoints[/api/auth/login, /api/auth/register]:::springLayer
-        Controllers -->|EmployeeController| EmpEndpoints[/api/employees/*]:::springLayer
-        Controllers -->|ProjectController| ProjEndpoints[/api/projects/*]:::springLayer
-        Controllers -->|TaskController| TaskEndpoints[/api/tasks/*]:::springLayer
-        Controllers -->|AttendanceController| AttEndpoints[/api/attendance/*]:::springLayer
-        Controllers -->|ShiftController| ShiftEndpoints[/api/shifts/*]:::springLayer
-        Controllers -->|AuditLogController| AuditEndpoints[/api/audit-logs/*]:::springLayer
-        Controllers -->|ReportController| ReportEndpoints[/api/reports/*]:::springLayer
+    subgraph Backend_Security ["Spring Boot Security & Controllers - Port 8080"]
+        JwtFilter -->|5a. Valid JWT| SecurityContext["Set SecurityContextHolder Authentication"]:::jwtLayer
+        JwtFilter -->|5b. Invalid / Missing JWT| AuthEntryPoint["Return HTTP 401 / 403 Error"]:::jwtLayer
+        SecurityContext --> Controllers["🎮 Spring Boot REST Controllers"]:::springLayer
+        Controllers -->|AuthController| AuthEndpoints["/api/auth/login, /api/auth/register"]:::springLayer
+        Controllers -->|EmployeeController| EmpEndpoints["/api/employees/*"]:::springLayer
+        Controllers -->|ProjectController| ProjEndpoints["/api/projects/*"]:::springLayer
+        Controllers -->|TaskController| TaskEndpoints["/api/tasks/*"]:::springLayer
+        Controllers -->|AttendanceController| AttEndpoints["/api/attendance/*"]:::springLayer
+        Controllers -->|ShiftController| ShiftEndpoints["/api/shifts/*"]:::springLayer
+        Controllers -->|AuditLogController| AuditEndpoints["/api/audit-logs/*"]:::springLayer
+        Controllers -->|ReportController| ReportEndpoints["/api/reports/*"]:::springLayer
     end
 
-    subgraph Business_Logic_Layer [Service & Repository Layer]
-        Controllers --> Services[⚙️ Service Layer - Business Logic & DTO Mapping]:::springLayer
-        Services --> Repositories[🗄️ Repository Layer - Spring Data JPA]:::springLayer
+    subgraph Business_Logic_Layer ["Service & Repository Layer"]
+        Controllers --> Services["⚙️ Service Layer - Business Logic & DTO Mapping"]:::springLayer
+        Services --> Repositories["🗄️ Repository Layer - Spring Data JPA"]:::springLayer
     end
 
-    subgraph Database_Layer [MySQL Persistence Layer]
-        Repositories -->|SQL Queries via HikariCP| MySQL[(📊 MySQL Database - ems_db)]:::dbLayer
+    subgraph Database_Layer ["MySQL Persistence Layer"]
+        Repositories -->|SQL Queries via HikariCP| MySQL[("📊 MySQL Database - ems_db")]:::dbLayer
         MySQL -->|Tables: users, employees, projects, tasks, attendance, shifts, audit_logs| Repositories
     end
 
@@ -252,5 +252,5 @@ Available live at **[http://localhost:8080/swagger-ui.html](http://localhost:808
 * **Developer**: **Harini Maliga**
 * **Role**: Java Full Stack Developer
 * **Project**: Smart Employee & Project Management System
-* **Repository**: [employee-management-system](https://github.com/HARINI/employee-management-system)
+* **Repository**: [employee-management-system](https://github.com/Harinimaliga/employee-management-system)
 * **Date**: July 2026
