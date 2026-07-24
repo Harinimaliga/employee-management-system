@@ -87,13 +87,26 @@ public class DataInitializer implements CommandLineRunner {
                     .lastName("Maliga")
                     .email("harini@gmail.com")
                     .phone("+1 555-0199")
-                    .department("CSE-DS")
+                    .department("Engineering")
                     .designation("Full Stack Engineer")
                     .salary(85000.0)
                     .dateOfJoining(LocalDate.now().minusYears(1))
                     .user(empUser)
                     .build();
             employeeRepository.save(hariniEmp);
+        }
+
+        // Seed additional workforce staff members if employee count < 5
+        if (employeeRepository.count() < 5) {
+            List<Employee> additionalStaff = Arrays.asList(
+                    Employee.builder().firstName("Swathi").lastName("Kadalury").email("swathi@company.com").phone("+1 555-0102").department("Finance").designation("Senior Software Engineer").salary(92000.0).dateOfJoining(LocalDate.now().minusYears(2)).build(),
+                    Employee.builder().firstName("John").lastName("Doe").email("john.doe@company.com").phone("+1 555-0103").department("Data Science").designation("Full Stack Developer").salary(88000.0).dateOfJoining(LocalDate.now().minusYears(1)).build(),
+                    Employee.builder().firstName("Divya").lastName("Sekhar").email("divya@company.com").phone("+1 555-0104").department("Engineering").designation("Software Engineer").salary(80000.0).dateOfJoining(LocalDate.now().minusMonths(8)).build(),
+                    Employee.builder().firstName("Preethi").lastName("Charan").email("preethi@company.com").phone("+1 555-0105").department("Engineering").designation("Software Engineer").salary(82000.0).dateOfJoining(LocalDate.now().minusMonths(6)).build(),
+                    Employee.builder().firstName("Sarah").lastName("Connor").email("sarah@company.com").phone("+1 555-0106").department("Engineering").designation("Senior Full Stack Developer").salary(96000.0).dateOfJoining(LocalDate.now().minusYears(2)).build(),
+                    Employee.builder().firstName("Alex").lastName("Holder").email("alex@company.com").phone("+1 555-0107").department("Engineering").designation("Software Engineer").salary(78000.0).dateOfJoining(LocalDate.now().minusMonths(4)).build()
+            );
+            employeeRepository.saveAll(additionalStaff);
         }
 
         // 2. Ensure Default Shifts if empty
