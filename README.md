@@ -11,6 +11,19 @@ A full-stack web application built to handle employee directory management, proj
 
 ---
 
+## 📷 Screenshots
+
+### ☀️ Light Mode Dashboard & Telemetry
+![Employee Task Portal Light Mode](screenshots/dashboard-light.jpg)
+
+### 🌙 Dark Mode Dashboard & Control Center
+![Smart EMS Control Center Dark Mode](screenshots/dashboard-dark.jpg)
+
+### 📁 Project Management & Team Portfolio
+![Project Management Portfolio](screenshots/projects-portfolio.jpg)
+
+---
+
 ## 💻 System Architecture
 
 ```mermaid
@@ -55,6 +68,10 @@ employee-management-system/
 │   │       ├── application-prod.properties
 │   │       └── application-test.properties
 │   └── test/                     # JUnit 5 & Mockito Unit Test Suite
+├── screenshots/                  # Application UI Screenshots
+│   ├── dashboard-light.jpg
+│   ├── dashboard-dark.jpg
+│   └── projects-portfolio.jpg
 ├── Dockerfile                    # Spring Boot JDK multi-stage Dockerfile
 ├── docker-compose.yml            # Multi-container orchestration (MySQL + Backend + Frontend)
 ├── pom.xml                       # Maven build configuration
