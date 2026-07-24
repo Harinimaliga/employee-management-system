@@ -23,6 +23,47 @@ flowchart LR
 
 ---
 
+## 📁 Project Directory Structure
+
+```text
+employee-management-system/
+├── frontend/                     # React 18 Single Page Application
+│   ├── public/                   # Static assets & HTML template
+│   ├── src/
+│   │   ├── components/           # Navbar, Sidebar, PrivateRoute, Telemetry Charts
+│   │   ├── context/              # AuthContext & ThemeContext (Light/Dark Mode)
+│   │   ├── hooks/                # Custom React authentication hooks
+│   │   ├── pages/                # Dashboard, Profile, Employees, Attendance, Shifts, Projects, Tasks, Reports, AuditLogs
+│   │   ├── services/             # Axios API client instance & JWT interceptors
+│   │   └── utils/                # Constants & helpers
+│   ├── Dockerfile                # Nginx multi-stage build Dockerfile
+│   └── package.json              # Frontend dependencies
+├── src/                          # Spring Boot Java Backend
+│   ├── main/
+│   │   ├── java/com/company/ems/
+│   │   │   ├── config/           # DataInitializer, WebMvc, Security, OpenApi
+│   │   │   ├── controller/       # Auth, Employee, Project, Task, Attendance, Shift, Audit, Report, Upload
+│   │   │   ├── dto/              # Data Transfer Objects & Requests
+│   │   │   ├── entity/           # JPA Entities (User, Employee, Project, Task, Attendance, Shift, AuditLog)
+│   │   │   ├── exception/        # Global Exception Handler
+│   │   │   ├── repository/       # Spring Data JPA Repositories
+│   │   │   ├── security/         # JWT Provider, Auth Filter, UserDetailsService
+│   │   │   └── service/          # Core Business Logic & OpenPDF/Apache POI Generators
+│   │   └── resources/
+│   │       ├── application.properties
+│   │       ├── application-dev.properties
+│   │       ├── application-prod.properties
+│   │       └── application-test.properties
+│   └── test/                     # JUnit 5 & Mockito Unit Test Suite
+├── Dockerfile                    # Spring Boot JDK multi-stage Dockerfile
+├── docker-compose.yml            # Multi-container orchestration (MySQL + Backend + Frontend)
+├── pom.xml                       # Maven build configuration
+├── schema.sql                    # MySQL Database DDL script
+└── README.md                     # Project documentation
+```
+
+---
+
 ## ⚡ Key Features
 
 * **Authentication & Role Security**: Stateless JWT authentication with distinct `ADMIN` and `EMPLOYEE` role privileges.
