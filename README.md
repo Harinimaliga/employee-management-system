@@ -19,8 +19,20 @@ A full-stack web application built to handle employee directory management, proj
 ### 🌙 Dark Mode Dashboard & Control Center
 ![Smart EMS Control Center Dark Mode](screenshots/dashboard-dark.jpg)
 
-### 📁 Project Management & Team Portfolio
+### 📁 Project Management & Portfolio
 ![Project Management Portfolio](screenshots/projects-portfolio.jpg)
+
+### ⏱️ Attendance Management & Telemetry
+![Attendance Management Telemetry](screenshots/attendance.jpg)
+
+### ⏰ Shift Scheduling & Management
+![Shift Scheduling Management](screenshots/shifts.jpg)
+
+### ⚡ Interactive Swagger API Documentation
+![OpenAPI Swagger UI Documentation](screenshots/swagger.jpg)
+
+### ⚙️ System Settings & Preferences
+![System Settings Preferences](screenshots/settings.jpg)
 
 ---
 
@@ -71,7 +83,11 @@ employee-management-system/
 ├── screenshots/                  # Application UI Screenshots
 │   ├── dashboard-light.jpg
 │   ├── dashboard-dark.jpg
-│   └── projects-portfolio.jpg
+│   ├── projects-portfolio.jpg
+│   ├── attendance.jpg
+│   ├── shifts.jpg
+│   ├── swagger.jpg
+│   └── settings.jpg
 ├── Dockerfile                    # Spring Boot JDK multi-stage Dockerfile
 ├── docker-compose.yml            # Multi-container orchestration (MySQL + Backend + Frontend)
 ├── pom.xml                       # Maven build configuration
